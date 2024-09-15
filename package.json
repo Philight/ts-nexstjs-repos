@@ -1,0 +1,34 @@
+{
+  "name": "ts-nexstjs-repos",
+  "version": "0.0.1",
+  "description": "<h1 align=\"center\">❗ This project is currently in development. <a href=\"/TODO.md\">TODO</a>❗</h1>",
+  "author": "Filip Lai",
+  "license": "ISC",
+  "type": "module",
+  "config": {
+    "CLIENT_HOST": "http://localhost",
+    "CLIENT_PORT": "3333",
+    "BASENAME": "/",
+    "REPOSITORY": "https://github.com/[USER]/[REPOSITORY].git"
+  },
+  "bin": {
+    "open-browser": "bin/openBrowser.js"
+  },
+  "scripts": {
+    "init": "npm link && chmod u+x bin/openBrowser.js",
+    "open-browser": "node bin/openBrowser.js $npm_package_config_CLIENT_HOST $npm_package_config_CLIENT_PORT",
+    "install": "concurrently --raw --kill-others --passthrough-arguments --success first -c \"blue,red\"  \"npm run install:server && npm run install:client\"",
+    "install2": "concurrently --raw --kill-others --passthrough-arguments --success first --prefixColors=blue,red  \"npm run install:server\" \"npm run install:client\"",
+    "install:client": "cd ./client && npm ci && exit 0",
+    "install:server": "cd ./server && npm ci && exit 0",
+    "start": "concurrently --raw --passthrough-arguments \"npm run start:server\" \"npm run start:client\" \"wait-on tcp:8080 && npm run open-browser\"",
+    "start:client": "cd ./client && npm run-script dev",
+    "start:server": "cd ./server && npm run-script init && npm run-script start:dev"
+  },
+  "dependencies": {
+    "concurrently": "^9.0.1",
+    "cross-var": "^1.1.0",
+    "open": "^10.1.0",
+    "wait-on": "^8.0.1"
+  }
+}

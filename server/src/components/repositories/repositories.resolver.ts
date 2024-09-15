@@ -30,7 +30,6 @@ export class RepositoriesResolver {
   // ========================================================================
 
   @Query(() => Repository)
-  // @Query('getRepository')
   async getRepository(@Args('id') id: string): Promise<PrismaRepository> {
     const repository = await this.repositoriesService.findOne(id);
     if (!repository) {
@@ -46,9 +45,6 @@ export class RepositoriesResolver {
     @Args('page', { nullable: true }) page: number,
     @Args('perPage', { nullable: true }) perPage: number,
   ): Promise<PrismaRepository[]> {
-    console.log('Repository RESOLVER args', args);
-    console.log('Repository RESOLVER ...args | ', name, page, perPage);
-
     if (!name) return [] as any;
 
     // return this.repositoriesService.findMany(args);
