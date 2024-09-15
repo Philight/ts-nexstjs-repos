@@ -30,8 +30,8 @@ export default function HomePage() {
     variables: { name: searchQuery, page, perPage: 10 },
   });
 
-  console.log('query state loading|error', loading, error);
-  console.log('query data', data);
+  // console.log('query state loading|error', loading, error);
+  // console.log('query data', data);
 
   const changePage = (mode: string) => {
     // setCursor(cursor);
@@ -50,7 +50,6 @@ export default function HomePage() {
     hasPreviousPage: page > 1,
     hasNextPage: page <= MAX_PAGES,
   };
-  console.log('pagination', page, pagination);
 
   return (
     <Meta title='Github Repositories'>
