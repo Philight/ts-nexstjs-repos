@@ -1,0 +1,64 @@
+@layer components {
+  .icon__c {
+    .icon {
+      @apply h-5 w-5 bg-black;
+    }
+  }
+
+  .button__c {
+    .btn {
+      @apply border-0;
+    }
+  }
+  .badge__c {
+    &.badge-glass {
+      border: none;
+      -webkit-backdrop-filter: blur(var(--glass-blur, 40px));
+      backdrop-filter: blur(var(--glass-blur, 40px));
+      background-color: transparent;
+      background-image: linear-gradient(135deg, rgb(255 255 255 / var(--glass-opacity, 30%)), #0000),
+        linear-gradient(var(--glass-reflex-degree, 100deg), rgb(255 255 255 / var(--glass-reflex-opacity, 10%)) 25%, rgb(0 0 0 / 0%) 25%);
+      box-shadow:
+        0 0 0 1px rgb(255 255 255 / var(--glass-border-opacity, 10%)) inset,
+        0 0 0 2px #0000000d;
+      text-shadow: 0 1px rgb(0 0 0 / var(--glass-text-shadow-opacity, 5%));
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-colored: 0 0 #0000;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+      outline-color: currentColor;
+      animation: button-pop var(--animation-btn, 0.25s) ease-out;
+      &:hover {
+        --glass-opacity: 25%;
+        --glass-border-opacity: 15%;
+      }
+    }
+    &.badge {
+      @apply rounded-sm border-solid;
+    }
+  }
+  .header__c {
+    .icon__c {
+      .icon {
+        @apply h-10 w-10;
+        @apply bg-neutral-content;
+      }
+    }
+  }
+  .search-form__c {
+    @apply max-w-[600px];
+  }
+  .search-bar__c {
+    @apply mt-2;
+    @apply input input-bordered input-primary h-14 pl-5 pr-1 md:pl-6;
+    @apply rounded-md bg-base-300;
+    .search-bar__input-wrapper {
+    }
+  }
+  .data-table__c {
+    @apply mt-8;
+    @apply w-full overflow-x-scroll;
+    .description {
+      @apply line-clamp-4;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Mutation {
+  removeRepository(id: String!): Repository
+}
+
+"""repo owner"""
+type Owner {
+  avatarUrl: String!
+  id: ID!
+  login: String!
+  url: String!
+}
+
+"""Primary language"""
+type PrimaryLanguage {
+  color: String!
+  id: ID!
+  name: String!
+}
+
+type Query {
+  getRepositories(name: String, page: Float, perPage: Float): [Repository!]!
+  getRepository(id: String!): Repository!
+}
+
+"""repository"""
+type Repository {
+  description: String
+  descriptionHTML: String!
+  externalID: ID!
+  homepageUrl: String
+  id: ID!
+  isArchived: Boolean!
+  isBlankIssuesEnabled: Boolean!
+  isDisabled: Boolean!
+  isEmpty: Boolean!
+  isFork: Boolean!
+  isInOrganization: Boolean!
+  isPrivate: Boolean!
+  isTemplate: Boolean!
+  name: String!
+  openGraphImageUrl: String!
+  owner: Owner!
+  primaryLanguage: PrimaryLanguage
+  stargazerCount: Float!
+  url: String!
+}

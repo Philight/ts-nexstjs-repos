@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Repository {
+  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  externalID        String @unique @map("_externalID")
+  cursor            String
+  // typename          String @map("__typename")
+  name              String
+  description       String?
+  descriptionHTML   String
+  url               String
+  homepageUrl       String?
+  openGraphImageUrl String
+  stargazerCount    Float
+
+  isArchived           Boolean
+  isBlankIssuesEnabled Boolean
+  isDisabled           Boolean
+  isEmpty              Boolean
+  isFork               Boolean
+  isInOrganization     Boolean
+  isPrivate            Boolean
+  isTemplate           Boolean
+
+  owner Owner @relation(fields: [ownerId], references: [id])
+  primaryLanguage   PrimaryLanguage? @relation(fields: [primaryLanguageId], references: [id])
+
+  ownerId           String           @db.ObjectId
+  primaryLanguageId String?          @db.ObjectId
+
+  @@map("repositories")
+}
+
+model Owner {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  externalID        String @unique @map("_externalID")
+  login      String       @unique
+  url        String
+  avatarUrl  String
+  Repository Repository[]
+
+  @@map("owners")
+}
+
+model PrimaryLanguage {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  externalID        String @unique @map("_externalID")
+  name       String       @unique
+  color      String
+  Repository Repository[]
+
+  @@map("primary_languages")
+}
+
+model Search {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  keyword    String      
+  cursor     String
+  recordCount      Float
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  @@map("searches")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  email     String  @unique
+  name      String  @unique
+  password  String
+  phone     String?
+  avatarURL String  @default("https://www.univ.kiev.ua/img/kobzar.jpg") @map("avatar_url")
+
+  aboutMe   String    @default("") @map("about_me")
+  // gender    Gender    @default(Unknown)
+  birthDate DateTime? @map("birth_date")
+
+  // roles Role[] @default([User])
+
+  // products Product[] @relation("owner")
+  // reviews  Review[]  @relation("author")
+
+  // orders         Order[]
+  // favorites      Product[]
+  // helpfulReviews Review[]
+
+  // promoCodes PromoCode[] @relation("owner")
+  // payments   Payment[]
+  // shipping   Shipping[]
+
+  // authoredComments   Comment[] @relation("author")
+  // comments  Comment[]
+  @@map("users")
+}
